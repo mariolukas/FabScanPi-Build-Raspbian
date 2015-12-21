@@ -228,6 +228,8 @@ mount -o bind ${delivery_path} ${rootfs}/usr/src/delivery
 cd ${rootfs}
 
 wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
+wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
+
 #wget ${deb_local_mirror}/raspbian.public.key -O - | gpg --import -
 
 echo "### DeBootStraping ###"
@@ -249,6 +251,13 @@ echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free
 echo "### Configuring CMDLINE ###"
 echo "+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup-enable=memory swapaccount=1 elevator=deadline rootwait console=ttyAMA0,115200 kgdboc=ttyAMA0,115200" > boot/cmdline.txt
 echo "hdmi_force_hotplug=1" > boot/config.txt
+
+# enable camera module
+echo "start_x=1" > boot/config.txt
+# more gpu memory
+echo "gpu_mem=128" > boot/config.txt
+# disable camera led
+echo "disable_camera_led=1" > boot/config.txt
 
 echo "### Configuring FSTAB ###"
 echo "proc            /proc	proc	defaults		0	0
@@ -310,6 +319,11 @@ LANG=C chroot ${rootfs} /third-stage
 echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free
 " > etc/apt/sources.list
 
+echo "deb http://archive.fabscan.org/ ${deb_release} main
+" >> etc/apt/sources.list
+
+wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
+
 echo "#!/bin/bash
 aptitude update
 aptitude clean
@@ -325,11 +339,11 @@ sync
 sleep 15
 
 # Make sure we're out of the root fs. We won't be able to unmount otherwise, and umount -l will fail silently.
-cd
+#cd
 
 umount -l ${bootp}
 umount -l ${rootfs}/usr/src/delivery
-umount -l ${rootfs}/dev/pts
+umount -l ${rootfs}/dev/pts 
 umount -l ${rootfs}/dev
 umount -l ${rootfs}/sys
 umount -l ${rootfs}/proc

@@ -9,6 +9,8 @@ fi
 echo "Please check environment variables etc, this script can be executed ONLY within RPI environment!"
 echo "When tasks done, type \"exit\" to return"
 echo ""
+wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
+
 cp /usr/src/delivery/firstboot.sh /root/firstboot.sh
 cat << EOF > /etc/rc.local
 #!/bin/sh -e
