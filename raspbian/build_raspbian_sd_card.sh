@@ -162,7 +162,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 echo "creating an image"
 mkdir -p ${buildenv}
 image="${buildenv}/images/raspbian_basic_${deb_release}_${now}.img"
-dd if=/dev/zero of=${image} bs=1MB count=940
+dd if=/dev/zero of=${image} bs=1MB count=2048
 device=`losetup -f --show ${image}`
 loop_device=$device
 echo "image ${image} created and mounted as ${device}"
@@ -221,16 +221,13 @@ mkdir -p ${rootfs}/usr/src/delivery
 
 mount -t proc none ${rootfs}/proc
 mount -t sysfs none ${rootfs}/sys
-#mount -o bind /dev ${rootfs}/dev
+mount -o bind /dev ${rootfs}/dev
 mount -o bind /dev/pts ${rootfs}/dev/pts
 mount -o bind ${delivery_path} ${rootfs}/usr/src/delivery
 
 cd ${rootfs}
 
 wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
-wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
-
-#wget ${deb_local_mirror}/raspbian.public.key -O - | gpg --import -
 
 echo "### DeBootStraping ###"
 #debootstrap --keyring /root/.gnupg/pubring.gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}/raspbian
@@ -322,7 +319,7 @@ echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free
 echo "deb http://archive.fabscan.org/ ${deb_release} main
 " >> etc/apt/sources.list
 
-wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
+#wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
 
 echo "#!/bin/bash
 aptitude update
