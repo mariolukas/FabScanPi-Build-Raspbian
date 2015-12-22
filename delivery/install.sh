@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 machine=`uname -m`
 if [ "${machine}" != "armv7l" ]; then
@@ -10,10 +10,10 @@ echo "Please check environment variables etc, this script can be executed ONLY w
 echo "When tasks done, type \"exit\" to return"
 echo ""
 
-wget http://archive.fabscan.org/fabscan.public.key -O - | apt-key add -
+#wget http://archive.fabscan.org/fabscan.public.key -O - | apt-key add -
 
 
-cat << EOF > /etc/rc.local
+#cat << EOF > /etc/rc.local
 #!/bin/sh -e
 #
 # rc.local
@@ -27,15 +27,15 @@ cat << EOF > /etc/rc.local
 #
 # By default this script does nothing
 
-if [ ! -e /root/firstboot_done ]; then
-        touch /root/firstboot_done
-        if [ -e /root/firstboot.sh ]; then
-                /root/firstboot.sh
-        fi
-fi
+#if [ ! -e /root/firstboot_done ]; then
+#        touch /root/firstboot_done
+#        if [ -e /root/firstboot.sh ]; then
+#                /root/firstboot.sh
+#       fi
+#fi
 
-exit 0
-EOF
+#exit 0
+#EOF
 
 export DEBIAN_FRONTEND=noninteractive
 source functions.sh

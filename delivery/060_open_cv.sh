@@ -2,7 +2,6 @@
 
 BannerEcho "OpenCV: Installing"
 
-
-AptInstall libtbb2_4.3 python-opencv-tbb  || return 1
+AptInstall libtbb2 python-opencv-tbb  || return 1
 
 BannerEcho "OpenCV: Done"
