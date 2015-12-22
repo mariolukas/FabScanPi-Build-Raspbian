@@ -9,9 +9,10 @@ fi
 echo "Please check environment variables etc, this script can be executed ONLY within RPI environment!"
 echo "When tasks done, type \"exit\" to return"
 echo ""
-wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
 
-cp /usr/src/delivery/firstboot.sh /root/firstboot.sh
+wget http://archive.fabscan.org/fabscan.public.key -O - | apt-key add -
+
+
 cat << EOF > /etc/rc.local
 #!/bin/sh -e
 #
@@ -35,3 +36,8 @@ fi
 
 exit 0
 EOF
+
+export DEBIAN_FRONTEND=noninteractive
+source functions.sh
+DirectoryOrderedExecute "$(pwd)"
+

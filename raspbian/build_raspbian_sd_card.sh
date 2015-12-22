@@ -78,7 +78,7 @@ fi
 
 bootsize="64M"
 deb_release="jessie"
-keyboard_layout="en_US.UTF-8"
+keyboard_layout="us"
 
 relative_path=`dirname $0`
 

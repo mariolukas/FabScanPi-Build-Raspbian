@@ -6,7 +6,7 @@ echo 'Starting firstboot.sh' >> /dev/kmsg
 
 # resize root partion to possible maximum
 echo 'Resizing root partition' >> /dev/kmsg
-/usr/local/bin/resize_root_partition
+/usr/sbin/resize_root_partition
 
 # Get current date from debian time server
 ntpdate 0.debian.pool.ntp.org
@@ -46,10 +46,10 @@ EOF
 echo 'Reconfigured locale' >> /dev/kmsg
 
 # Set timezone
-echo 'Europe/Berlin' > /etc/timezone
-dpkg-reconfigure -f noninteractive tzdata
+#echo 'Europe/Berlin' > /etc/timezone
+#dpkg-reconfigure -f noninteractive tzdata
 
-echo 'Reconfigured timezone' >> /dev/kmsg
+#echo 'Reconfigured timezone' >> /dev/kmsg
 
 #echo 'Enabling and starting docker service' >> /dev/kmsg
 #systemctl enable docker.service
