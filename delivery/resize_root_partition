@@ -50,4 +50,4 @@ w
 EOF
 
 partprobe
-sbin/resize2fs $DISK
+/sbin/resize2fs $DISK
