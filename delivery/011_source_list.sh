@@ -12,4 +12,3 @@ apt-get update
 
 BannerEcho "APT: Configure Done"
 
-bash
