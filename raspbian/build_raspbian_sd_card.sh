@@ -58,8 +58,8 @@
 # apt-get install binfmt-support qemu qemu-user-static debootstrap kpartx lvm2 dosfstools
 
 deb_mirror="http://archive.raspbian.org/raspbian/"
-deb_local_mirrir="http://archive.raspbian.org/raspbian/"
-#deb_local_mirror="http://localhost:3142/archive.raspbian.org/raspbian/"
+#deb_local_mirrir="http://archive.raspbian.org/raspbian/"
+deb_local_mirror="http://localhost:3142/archive.raspbian.org/raspbian/"
 
 if [ ${EUID} -ne 0 ]; then
   echo "this tool must be run as root"
@@ -242,7 +242,7 @@ echo "### END DeBootStraping second stage ###"
 mount ${bootp} ${bootfs}
 
 echo "### Configuring APT ###"
-echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free
+echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
 echo "### Configuring CMDLINE ###"
@@ -313,7 +313,7 @@ rm -f third-stage
 chmod +x third-stage
 LANG=C chroot ${rootfs} /third-stage
 
-echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free
+echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
 echo "deb http://archive.fabscan.org/ ${deb_release} main
