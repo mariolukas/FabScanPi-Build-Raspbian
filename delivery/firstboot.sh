@@ -43,7 +43,7 @@ cat << EOF | debconf-set-selections
 locales   locales/default_environment_locale select       en_US.UTF-8
 EOF
 
-echo 'Reconfigured locale' >> /dev/kmsg
+#echo 'Reconfigured locale' >> /dev/kmsg
 
 reboot
 # Set timezone

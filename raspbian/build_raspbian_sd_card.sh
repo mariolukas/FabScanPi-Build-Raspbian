@@ -58,8 +58,9 @@
 # apt-get install binfmt-support qemu qemu-user-static debootstrap kpartx lvm2 dosfstools
 
 deb_mirror="http://archive.raspbian.org/raspbian/"
-#deb_local_mirrir="http://archive.raspbian.org/raspbian/"
-deb_local_mirror="http://localhost:3142/archive.raspbian.org/raspbian/"
+deb_local_mirror=$deb_mirror
+
+#deb_local_mirror="http://localhost:3142/archive.raspbian.org/raspbian/"
 
 if [ ${EUID} -ne 0 ]; then
   echo "this tool must be run as root"
@@ -161,7 +162,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 # create image file and use it with a loop device
 echo "creating an image"
 mkdir -p ${buildenv}
-image="${buildenv}/images/raspbian_basic_${deb_release}_${now}.img"
+image="${buildenv}/images/fabscanpi_basic_${deb_release}_${now}.img"
 dd if=/dev/zero of=${image} bs=1MB count=2048
 device=`losetup -f --show ${image}`
 loop_device=$device
@@ -230,7 +231,7 @@ cd ${rootfs}
 wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
 
 echo "### DeBootStraping ###"
-#debootstrap --keyring /root/.gnupg/pubring.gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}/raspbian
+#debootstrap --keyring /root/.gnupg/pubring.gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}
 debootstrap --no-check-gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}
 cp /usr/bin/qemu-arm-static usr/bin/
 mkdir -p usr/share/keyrings
@@ -247,14 +248,15 @@ echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free rpi
 
 echo "### Configuring CMDLINE ###"
 echo "+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup-enable=memory swapaccount=1 elevator=deadline rootwait console=ttyAMA0,115200 kgdboc=ttyAMA0,115200" > boot/cmdline.txt
-echo "hdmi_force_hotplug=1" >> boot/config.txt
+
+#echo "hdmi_force_hotplug=1" >> boot/config.txt
 
 # enable camera module
-echo "start_x=1" >> boot/config.txt
+#echo "start_x=1" >> boot/config.txt
 # more gpu memory
-echo "gpu_mem=128" >> boot/config.txt
+#echo "gpu_mem=128" >> boot/config.txt
 # disable camera led
-echo "disable_camera_led=1" >> boot/config.txt
+#echo "disable_camera_led=1" >> boot/config.txt
 
 echo "### Configuring FSTAB ###"
 echo "proc            /proc	proc	defaults		0	0
