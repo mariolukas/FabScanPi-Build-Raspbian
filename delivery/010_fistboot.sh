@@ -1,6 +1,6 @@
 #!/bin/bash
 
-AptInstall avahi-daemon || return 1
+AptInstall parted || return 1
 
 cp /usr/src/delivery/firstboot.sh /root/firstboot.sh
 cp /usr/src/delivery/resize_root_partition /usr/sbin/resize_root_partition
@@ -19,12 +19,15 @@ cat << EOF > /etc/rc.local
 #
 # By default this script does nothing
 
+
 if [ ! -e /root/firstboot_done ]; then
         touch /root/firstboot_done
         if [ -e /root/firstboot.sh ]; then
                 /root/firstboot.sh
         fi
 fi
+
+/etc/init.d/fabscanpi-server start
 
 exit 0
 EOF

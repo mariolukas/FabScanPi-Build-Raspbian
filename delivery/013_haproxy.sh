@@ -30,8 +30,6 @@ frontend public
         default_backend fabscanpi
 
 backend fabscanpi
-        reqrep ^([^\ :]*)\ /(.*)     \1\ /\2
-        option forwardfor
-        server fabscanpi1 127.0.0.1:8080"  > /etc/haproxy/haproxy.cfg
+       server fabscanpi1 127.0.0.1:8080"  > /etc/haproxy/haproxy.cfg
 
 BannerEcho "Haproxy: Done"

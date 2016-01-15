@@ -58,9 +58,7 @@
 # apt-get install binfmt-support qemu qemu-user-static debootstrap kpartx lvm2 dosfstools
 
 deb_mirror="http://archive.raspbian.org/raspbian/"
-deb_local_mirror=$deb_mirror
-
-#deb_local_mirror="http://localhost:3142/archive.raspbian.org/raspbian/"
+deb_local_mirror="http://127.0.0.1:3142/archive.raspbian.org/raspbian/"
 
 if [ ${EUID} -ne 0 ]; then
   echo "this tool must be run as root"
@@ -163,7 +161,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 echo "creating an image"
 mkdir -p ${buildenv}
 image="${buildenv}/images/fabscanpi_basic_${deb_release}_${now}.img"
-dd if=/dev/zero of=${image} bs=1MB count=2048
+dd if=/dev/zero of=${image} bs=1MB count=1800
 device=`losetup -f --show ${image}`
 loop_device=$device
 echo "image ${image} created and mounted as ${device}"
@@ -247,7 +245,7 @@ echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
 echo "### Configuring CMDLINE ###"
-echo "+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup-enable=memory swapaccount=1 elevator=deadline rootwait console=ttyAMA0,115200 kgdboc=ttyAMA0,115200" > boot/cmdline.txt
+echo "+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup-enable=memory swapaccount=1 elevator=deadline rootwait" > boot/cmdline.txt
 
 #echo "hdmi_force_hotplug=1" >> boot/config.txt
 
