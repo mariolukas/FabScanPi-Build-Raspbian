@@ -1,8 +1,8 @@
 before_install:
   - sudo apt-get -qq update
-
+  
 isntall:
-  - sudo ./install.sh
+  - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx lvm2 dosfstools apt-cacher-ng parted
 
 script: 
   - sudo ./raspbian/build_raspbian_sd_card.sh
