@@ -1,0 +1,8 @@
+before_install:
+  - sudo apt-get -qq update
+
+isntall:
+  - sudo ./install.sh
+
+script: 
+  - sudo ./raspbian/build_raspbian_sd_card.sh
