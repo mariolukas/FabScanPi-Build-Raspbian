@@ -1,3 +1,4 @@
+dist: trusty
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx lvm2 dosfstools apt-cacher-ng parted
