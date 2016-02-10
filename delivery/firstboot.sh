@@ -45,7 +45,7 @@ EOF
 
 #echo 'Reconfigured locale' >> /dev/kmsg
 
-reboot
+#reboot
 # Set timezone
 #echo 'Europe/Berlin' > /etc/timezone
 #dpkg-reconfigure -f noninteractive tzdata
