@@ -45,6 +45,8 @@ EOF
 
 #echo 'Reconfigured locale' >> /dev/kmsg
 
+/etc/init.d/fabscanpi-server restart
+
 #reboot
 # Set timezone
 #echo 'Europe/Berlin' > /etc/timezone
