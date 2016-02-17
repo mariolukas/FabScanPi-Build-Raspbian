@@ -3,7 +3,7 @@
 
 BannerEcho "Tools: Installing"
 
-AptInstall raspstill mc htop || return 1
+AptInstall raspstill mc htop minicom || return 1
 
 BannerEcho "Tools: Done"
 
