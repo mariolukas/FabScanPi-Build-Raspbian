@@ -7,7 +7,7 @@ script:
 - sudo ./raspbian/build_raspbian_sd_card.sh
 - ls
 before_deploy:
-- export RELEASE_FILE_NAME=$(ls /rpi/images/fabscanpi_basic_jessie_*.img)
+- export RELEASE_FILE_NAME=$(ls /home/travis/build/mariolukas/FabScanPi-Build-Raspbian/rpi/images/*.img)
 - export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
 - export SHA1=$(sha1sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
 - touch MD5:"${MD5}"
