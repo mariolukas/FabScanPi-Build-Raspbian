@@ -1,26 +1,26 @@
 dist: trusty
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
-    lvm2 dosfstools apt-cacher-ng parted
+- sudo apt-get -qq update
+- sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
+  lvm2 dosfstools apt-cacher-ng parted
 script:
-  - sudo ./raspbian/build_raspbian_sd_card.sh
+- sudo ./raspbian/build_raspbian_sd_card.sh
 before_deploy:
-  - export RELEASE_FILE_NAME=$(ls ${HOME}/build/${TRAVIS_REPO_SLUG}/rpi/images/fabscanpi_basic_jessie_*.img)
-  - export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
-  - export SHA1=$(sha1sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
-  - touch MD5:"${MD5}"
-  - touch SHA1:"${SHA1}"
-  - echo "deploying $RELEASE_FILE_NAME to GitHub releases"
+- export RELEASE_FILE_NAME=$(ls ${HOME}/build/${TRAVIS_REPO_SLUG}/rpi/images/fabscanpi_basic_jessie_*.img)
+- export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
+- export SHA1=$(sha1sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
+- touch MD5:"${MD5}"
+- touch SHA1:"${SHA1}"
+- echo "deploying $RELEASE_FILE_NAME to GitHub releases"
 deploy:
   file_glob: true
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: 5AaCi/l7P5RmstVSYuegfbi02UenHKRVp/j63Jl4VoozWdz8M2Dqpcd+Y/eONlqEo927HX2tkYvLfYx/08+wkjDoIR9WuiAMxkCwGB19E7060fTBeNO03FO6LuNt3ru6DRm0Q+ZzvrUEbLqjmh7iqfF4bZHtybveangi7mlHu8lnCgbDYmjQMf3QuEgZXvwKxkyPYsH4EegdBOF9IOvqpzZFvr+8XdumtPJ6uGaillQdS6iK8pG8gWPomm5lE1B8j0U28dI30/0SaRQrmj8yc1hwd9PKB7pEkczj17OZQNi5dGBQ5VADUaQTT4Kp8A4t9DNdJSSHobV7QypM5mlrnUQiAUabTFU7NPdyentc27FkCOeMnwpZpbi0Y0+qW5vmuBe8dc95ctb5fKgy3YO91+umW4m1EKqm3Ae2cDxxTebMKE+L3Uho6gUP4U29NvU/Ii+TEMS90Tqc4Lmxfi/JbX6RE4F+jbU6oYUm+nKq5ItHG/z+Kg/sz0tmfJ1ugk6LeSUIGJJflE2eWSD4uRlz7s3Wvo3/TTcCfn/jk034z8vMr/fgeL2yqxdRUrS7tN6ORQsC9uHGCkB4xNPT/KibKEHfiA5rkJ6DnpO0RUfjjyCi7ogQejvbe+grZlM9hP32M+au4VfSMWBHEMkrW168t+uMVxBPJ8+cLaJU3xUlCE4=
-  file: 
-    - "${RELEASE_FILE_NAME}"
-    - "MD5:${MD5}"
-    - "SHA1:${SHA1}"
+    secure: N8oPoOeaurOcXHLef8Ucp1UTKCigFnRQeM8LJGwA7o9yPutavwIHjvES9HV/Sr62G6q0FN2JOgIGc4A7fUX1QWdsVIol7Wunkq5bMuwokgv6d/CoWJlQxpGdvZx1UAO4517HpSvx/QT7/yPjRxYtTHkGwzmkQCgqDBa6kETUnp1x3UXJl1lk9AMWO7sTjYLZ9DMNcwhPHQx5l94J0Lk3MUmPthClACgruRckvgeCGg8Jr7NA5gfforgkH1m/t28k6EOw+SiW1uE4GvOLtcpqvRns9hCKNoIzPRi1k4r3TgIat27p4v8PR8rbhvDgy0qTxrzly1ja42bR3+HWp2mpkWcOwzLQpMJsjmEHS7iP861FiCM7HLlw3gvLsGxBEA5VOgjoWCpn4B9dTUHU1fyKvyX2ZjuGidxcIqM/IXBdfX+ZEQA01ZVTl4zk4OWPQt/DQ0Ju3XlJmIUJBm9k98wFns5cFUWmEwxMV2Eez2umclzAvIqsXysxzFSNbFStZnMRqIRS+S7ulhtCSsgE/1I1/VLOEuNFB/0zewtyRsCL/4YyAkO/3RI3Og5W3LZSP40LQ3t5rmO0TiLHsPdqUV5w+VyZMzF77m3gxVSXGawU/n4rKjmtskZCwLROOAeAVBg0Svl19wRnsq4ZZeTgEFQV3bmCqxaSRPrqpn0iVlrON+w=ile:
+  file:
+  - "${RELEASE_FILE_NAME}"
+  - MD5:${MD5}
+  - SHA1:${SHA1}
   on:
     tags: true
