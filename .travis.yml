@@ -10,7 +10,7 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: 5AaCi/l7P5RmstVSYuegfbi02UenHKRVp/j63Jl4VoozWdz8M2Dqpcd+Y/eONlqEo927HX2tkYvLfYx/08+wkjDoIR9WuiAMxkCwGB19E7060fTBeNO03FO6LuNt3ru6DRm0Q+ZzvrUEbLqjmh7iqfF4bZHtybveangi7mlHu8lnCgbDYmjQMf3QuEgZXvwKxkyPYsH4EegdBOF9IOvqpzZFvr+8XdumtPJ6uGaillQdS6iK8pG8gWPomm5lE1B8j0U28dI30/0SaRQrmj8yc1hwd9PKB7pEkczj17OZQNi5dGBQ5VADUaQTT4Kp8A4t9DNdJSSHobV7QypM5mlrnUQiAUabTFU7NPdyentc27FkCOeMnwpZpbi0Y0+qW5vmuBe8dc95ctb5fKgy3YO91+umW4m1EKqm3Ae2cDxxTebMKE+L3Uho6gUP4U29NvU/Ii+TEMS90Tqc4Lmxfi/JbX6RE4F+jbU6oYUm+nKq5ItHG/z+Kg/sz0tmfJ1ugk6LeSUIGJJflE2eWSD4uRlz7s3Wvo3/TTcCfn/jk034z8vMr/fgeL2yqxdRUrS7tN6ORQsC9uHGCkB4xNPT/KibKEHfiA5rkJ6DnpO0RUfjjyCi7ogQejvbe+grZlM9hP32M+au4VfSMWBHEMkrW168t+uMVxBPJ8+cLaJU3xUlCE4=
-  file: rpi/images/fabscanpi_basic_jessie_*.img
+  file: ${HOME}/build/${TRAVIS_REPO_SLUG}/rpi/images/fabscanpi_basic_jessie_*.img 
   on:
     repo: mariolukas/FabScanPi-Build-Raspbian
     tags: true
