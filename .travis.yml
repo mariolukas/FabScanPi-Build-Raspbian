@@ -1,7 +1,4 @@
 dist: trusty
-env:
-  global:
-   secure: O9sTSS/gpFs1TeYzBDm9S839Y3+VsdKq0//MVlK6Zb0gz4NwvF+UZlPKWpVPzR1zQzWnBZnanoNS7U4M0LlvHgf2f9Yod3P8wDhGWdGYXRlXiTo6wtXbm+y+KsOYuGalfRMOAfG3HBpABLoM1xTGNuydwX6TJ8zCaR9xP98jDIzkGkCo5PmDgGm0jQcLr9Xad35pX6a8YJgd1AQzna2AR6Yx/p6E/5i/emkGII1jqm2/CDgcLA5ugfqnf9SCVUMVCNA1kbwhMrzfdHQiiknQNiJu9LFr8nOwQM++uY62NDIwXWAGgPkPbbx/ZTcvkNhW8w1WAgZnjK8x4RAsHD2Em/hpB9V37JG8vcVA+5Gp9knq4rOadpq0PbfGWHNtw//82odLmqJUP/2k1QQhQNt2L9AK2C8ojEV7mqniFGCCbupj5OuzrwRH4HyU0efPMUaQMEhHQafXjHoG/6dWlE/JIjMcM1NkbVMjgQL8d9CogqPyw+ztFff37rPXVV7fY8I4nf8+d/p8isWtP6VWA6wkuzNAhiynnG87uJRtCjJh7jg/lqWoespnL/1CcpQZYw9fHbBgCwNuexaEqmU7FsYp8KZdQChQXL7a/TV5f7+80mqWB8hdQPNH1nWOCyu2ZLYSJbCCA5iMw3KUPrTLPuc5BP/wqzRRrQ9hOOlnoW1HBbA=
 before_install:
 - sudo apt-get -qq update
 - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
@@ -16,14 +13,9 @@ before_deploy:
 - touch SHA1:"${SHA1}"
 - echo "deploying $RELEASE_FILE_NAME to GitHub releases"
 deploy:
-  file_glob: true
   provider: releases
-  skip_cleanup: true
   api_key:
-    secure: O9sTSS/gpFs1TeYzBDm9S839Y3+VsdKq0//MVlK6Zb0gz4NwvF+UZlPKWpVPzR1zQzWnBZnanoNS7U4M0LlvHgf2f9Yod3P8wDhGWdGYXRlXiTo6wtXbm+y+KsOYuGalfRMOAfG3HBpABLoM1xTGNuydwX6TJ8zCaR9xP98jDIzkGkCo5PmDgGm0jQcLr9Xad35pX6a8YJgd1AQzna2AR6Yx/p6E/5i/emkGII1jqm2/CDgcLA5ugfqnf9SCVUMVCNA1kbwhMrzfdHQiiknQNiJu9LFr8nOwQM++uY62NDIwXWAGgPkPbbx/ZTcvkNhW8w1WAgZnjK8x4RAsHD2Em/hpB9V37JG8vcVA+5Gp9knq4rOadpq0PbfGWHNtw//82odLmqJUP/2k1QQhQNt2L9AK2C8ojEV7mqniFGCCbupj5OuzrwRH4HyU0efPMUaQMEhHQafXjHoG/6dWlE/JIjMcM1NkbVMjgQL8d9CogqPyw+ztFff37rPXVV7fY8I4nf8+d/p8isWtP6VWA6wkuzNAhiynnG87uJRtCjJh7jg/lqWoespnL/1CcpQZYw9fHbBgCwNuexaEqmU7FsYp8KZdQChQXL7a/TV5f7+80mqWB8hdQPNH1nWOCyu2ZLYSJbCCA5iMw3KUPrTLPuc5BP/wqzRRrQ9hOOlnoW1HBbA=
-  file:
-  - "${RELEASE_FILE_NAME}"
-  - MD5:${MD5}
-  - SHA1:${SHA1}
+    secure: VOhySJhtWtd3GUuIcqCsvMpFoFh/rFoL1z9BWwWm2AalddpRPR6KkG62MO0VsIaRcWb3iXJiOCqaq5MNoDJz+6pFEPlE1O/6CEUkhQHhqg6C9sg97a5gAhKU9PQnhzM/KGEmJ/VsVj0Cww8jlQ7+4kfHKumO7OaU5v/+s9mkMZ80iLLxXlmlsuHBxTDwjj/lDW4G310nGiokAAyg07zRHH55QNCGjBCiFpwAL/fMGYzpHHcP9Eck6UO7Eb0RGe7bL0kFJtyjg6J1Q1z/9nkWsrAx0lqNh5EQEYazX1pG2fZPWzcxKH3y+chLl4xODBO9IOJCmnDtcDqjSN51+QBDlCklSnTYsfJZk2ilkinqgTCUcko1SHugCttokiUWEP1jB2m1wbOuVbJLuLpv7h+R4MH2WconUDwGHbU+3CZx5UKogMhXupDOqYDhLftohMNm+otAdvbtMmlCK6wyucfI9WAFkDh6wsgsiDMkWpmCmEg0yGrlUhjTLTy/v5g+YkIfO1MWrCbNbR3reB4B07YuI4a/zTIEeMyfuJ4TVCget/WPqv2W0JygIo7ijBK5Nyh764saEMn20jdyT+GKtiQ1xmMWKwS3wQGyTffDU3zqkDye1sGhvV7rAi9NAUeIdg6czHn8TglPX9cZz+TxLJ3CrGUY1X/lzrlKxq8rgqIc4Ao=
+  file: '"${RELEASE_FILE_NAME}"'
   on:
-    tags: true
+    repo: mariolukas/FabScanPi-Build-Raspbian
