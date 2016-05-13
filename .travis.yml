@@ -4,8 +4,8 @@ before_install:
 - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
   lvm2 dosfstools apt-cacher-ng parted
 script:
-- ls
 - sudo ./raspbian/build_raspbian_sd_card.sh
+- ls
 before_deploy:
 - export RELEASE_FILE_NAME=$(ls /rpi/images/fabscanpi_basic_jessie_*.img)
 - export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
