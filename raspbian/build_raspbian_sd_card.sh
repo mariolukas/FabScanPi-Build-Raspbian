@@ -72,10 +72,14 @@ if ! [ -b ${device} ]; then
 fi
 
 tag=$1
-if ! [ -b ${tag} ]; then
+if [ -n ${tag} ]; then
    now=`date +%Y-%m-%d-%H-%M`
    tag=$now
+   echo "using current date for tagging build ${now}"
+else
+   echo "using tag ${tag} for image"	
 fi
+
 
 if [ "${deb_local_mirror}" == "" ]; then
   deb_local_mirror=${deb_mirror}
