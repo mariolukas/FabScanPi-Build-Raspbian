@@ -72,7 +72,7 @@ if ! [ -b ${device} ]; then
 fi
 
 tag=$1
-if [ -n ${tag} ]; then
+if [ -z $tag ]; then
    now=`date +%Y-%m-%d-%H-%M`
    tag=$now
    echo "using current date for tagging build ${now}"
