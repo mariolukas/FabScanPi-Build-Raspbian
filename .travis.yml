@@ -4,10 +4,9 @@ before_install:
 - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
   lvm2 dosfstools apt-cacher-ng parted
 script:
-- sudo ./raspbian/build_raspbian_sd_card.sh
-- ls
+- sudo ./raspbian/build_raspbian_sd_card.sh "${TRAVIS_TAG}"
 before_deploy:
-- export RELEASE_FILE_NAME=$(ls /home/travis/build/mariolukas/FabScanPi-Build-Raspbian/rpi/images/*.img)
+- export RELEASE_FILE_NAME="/home/travis/build/mariolukas/FabScanPi-Build-Raspbian/rpi/images/fabscanpi_basic_jessie_${TRAVIS_TAG}"
 - export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
 - export SHA1=$(sha1sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
 - touch MD5:"${MD5}"
@@ -18,7 +17,7 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: VOhySJhtWtd3GUuIcqCsvMpFoFh/rFoL1z9BWwWm2AalddpRPR6KkG62MO0VsIaRcWb3iXJiOCqaq5MNoDJz+6pFEPlE1O/6CEUkhQHhqg6C9sg97a5gAhKU9PQnhzM/KGEmJ/VsVj0Cww8jlQ7+4kfHKumO7OaU5v/+s9mkMZ80iLLxXlmlsuHBxTDwjj/lDW4G310nGiokAAyg07zRHH55QNCGjBCiFpwAL/fMGYzpHHcP9Eck6UO7Eb0RGe7bL0kFJtyjg6J1Q1z/9nkWsrAx0lqNh5EQEYazX1pG2fZPWzcxKH3y+chLl4xODBO9IOJCmnDtcDqjSN51+QBDlCklSnTYsfJZk2ilkinqgTCUcko1SHugCttokiUWEP1jB2m1wbOuVbJLuLpv7h+R4MH2WconUDwGHbU+3CZx5UKogMhXupDOqYDhLftohMNm+otAdvbtMmlCK6wyucfI9WAFkDh6wsgsiDMkWpmCmEg0yGrlUhjTLTy/v5g+YkIfO1MWrCbNbR3reB4B07YuI4a/zTIEeMyfuJ4TVCget/WPqv2W0JygIo7ijBK5Nyh764saEMn20jdyT+GKtiQ1xmMWKwS3wQGyTffDU3zqkDye1sGhvV7rAi9NAUeIdg6czHn8TglPX9cZz+TxLJ3CrGUY1X/lzrlKxq8rgqIc4Ao=
-  file: '"${RELEASE_FILE_NAME}"'
+  file: "${RELEASE_FILE_NAME}"
   file_glob: true
   on:
     tags: true

@@ -65,10 +65,16 @@ if [ ${EUID} -ne 0 ]; then
   exit 1
 fi
 
-device=$1
+device=$2
 if ! [ -b ${device} ]; then
   echo "${device} is not a block device"
   exit 1
+fi
+
+tag=$1
+if ! [ -b ${tag} ]; then
+   now=`date +%Y-%m-%d-%H-%M`
+   tag=$now
 fi
 
 if [ "${deb_local_mirror}" == "" ]; then
@@ -95,9 +101,6 @@ buildenv=`cd ${absolute_path}; cd ..; mkdir -p rpi/images; cd rpi; pwd`
 
 rootfs="${buildenv}/rootfs"
 bootfs="${rootfs}/boot"
-
-now=`date +%Y-%m-%d-%H-%M`
-today=`date +%Y%m%d`
 
 image=""
 
@@ -160,7 +163,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 # create image file and use it with a loop device
 echo "creating an image"
 mkdir -p ${buildenv}
-image="${buildenv}/images/fabscanpi_basic_${deb_release}_${now}.img"
+image="${buildenv}/images/fabscanpi_basic_${deb_release}_${tag}.img"
 dd if=/dev/zero of=${image} bs=1MB count=1800
 device=`losetup -f --show ${image}`
 loop_device=$device
