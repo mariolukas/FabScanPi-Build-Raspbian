@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mariolukas/FabScanPi-Build-Raspbian.svg?branch=master)](https://travis-ci.org/mariolukas/FabScanPi-Build-Raspbian)
 Build Raspbian Image
 =========================================================
 
