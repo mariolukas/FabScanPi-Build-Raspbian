@@ -2,7 +2,7 @@
 Build Raspbian Image
 =========================================================
 
-Build (and cross-compile) your own image for Raspberry Pi
+Build (and cross-compile) your own Raspian image for FabScanPi
 
 Set of bash scripts for your Debian or Ubuntu Linux to create your own .img file for Raspberry Pi.
 Have your own image with YOUR content in minutes!
@@ -14,11 +14,6 @@ About initial code
 
 Original script was created to burn Debian Wheezy, my target is Raspbian, which is better for Raspberry Pi. You can read more about Raspbian (and its difference from stock Debian) at project page: http://raspbian.org
 
-Milestones of this project
----------------------------------------------------------
-- [x] Add script to create minimal Raspbian image
-- [ ] Add image mount / unmount script with cross-compilation environment for mounted system
-- [ ] Be able to deploy images (add individual hostname and root password, OpenVPN client settings)
 
 Instructions
 ---------------------------------------------------------
@@ -31,7 +26,9 @@ Install minimal set of packages:
 
 Run build_raspbian_sd_card.sh script, do burn your SD card
 
-	./build_raspbian_sd_card.sh /dev/sdX
+	./build_raspbian_sd_card.sh <build_id> /dev/sdX
+
+you can choose a custom build_id, e.g. "2016-02-30" ( date of build )
 
 OR to create IMG file (you'll find it under /tmp/rpi folder)
 
