@@ -2,6 +2,20 @@
 
 BannerEcho "Configure AVR Dude Autoreset: Installing"
 
+AptInstall avrdude || return 1
 
+chmod +x autoreset
+chmod +x avrdude-autoreset
+mv autoreset /usr/bin
+mv avrdude-autoreset /usr/bin
+mv /usr/bin/avrdude /usr/bin/avrdude-original
+ln -s /usr/bin/avrdude-autoreset /usr/bin/avrdude
+
+touch /etc/udev/rules.d/80-arduinopi.rules
+echo "KERNEL=="ttyAMA0", SYMLINK+="ttyS0",GROUP="dialout",MODE:=0666" > /etc/udev/rules.d/80-arduinopi.rules
+
+sed -i -e 's/T0:23:respawn:/#T0:23:respawn:/g' /etc/inittab
+
+usermod -a -G dialout pi
 
 BannerEcho "Configure AVR Dude Autoreset: Installation Done
