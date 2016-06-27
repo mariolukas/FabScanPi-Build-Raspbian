@@ -47,7 +47,7 @@ EOF
 
 /etc/init.d/fabscanpi-server restart
 
-reboot
+#reboot
 # Set timezone
 #echo 'Europe/Berlin' > /etc/timezone
 #dpkg-reconfigure -f noninteractive tzdata
