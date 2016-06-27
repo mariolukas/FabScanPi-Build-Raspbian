@@ -2,7 +2,11 @@
 
 BannerEcho "CONFIG.TXT: Configure"
 
-echo "hdmi_force_hotplug=1" >> boot/config.txt
+if [ ! -f /boot/config.txt ]; then
+    touch /boot/config.txt
+fi
+
+echo "hdmi_force_hotplug=1" >> /boot/config.txt
 
 # enable camera module
 echo "start_x=1" >> /boot/config.txt
