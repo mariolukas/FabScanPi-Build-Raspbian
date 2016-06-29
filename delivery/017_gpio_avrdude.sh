@@ -14,7 +14,9 @@ ln -s /usr/bin/avrdude-autoreset /usr/bin/avrdude
 touch /etc/udev/rules.d/80-arduinopi.rules
 echo "KERNEL=="ttyAMA0", SYMLINK+="ttyS0",GROUP="dialout",MODE:=0666" > /etc/udev/rules.d/80-arduinopi.rules
 
-sed -i -e 's/T0:23:respawn:/#T0:23:respawn:/g' /etc/inittab
+if [ -f /etc/inittab ]; then
+  sed -i -e 's/T0:23:respawn:/#T0:23:respawn:/g' /etc/inittab
+fi
 
 usermod -a -G dialout pi
 

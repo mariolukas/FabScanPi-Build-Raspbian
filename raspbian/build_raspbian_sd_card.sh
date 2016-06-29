@@ -287,8 +287,7 @@ bcm2708-rng
 
 echo "### CONSOLE ###"
 echo "console-common	console-data/keymap/policy	select	Select keymap from full list
-console-common  console-data/keymap/full        select  ${keyboard_layout}
-console-data    console-data/keymap/full        select  ${keyboard_layout}
+console-common  console-data/keymap/full        select  us
 " > debconf.set
 
 echo "#!/bin/bash
