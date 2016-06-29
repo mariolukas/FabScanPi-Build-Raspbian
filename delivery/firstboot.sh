@@ -45,7 +45,7 @@ EOF
 
 #echo 'Reconfigured locale' >> /dev/kmsg
 
-/etc/init.d/fabscanpi-server restart
+#/etc/init.d/fabscanpi-server restart
 
 #reboot
 # Set timezone
