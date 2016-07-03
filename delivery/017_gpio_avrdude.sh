@@ -2,7 +2,7 @@
 
 BannerEcho "Configure AVR Dude Autoreset: Installing"
 
-AptInstall avrdude || return 1
+AptInstall avrdude python-rpi.gpio || return 1
 
 chmod +x autoreset
 chmod +x avrdude-autoreset
