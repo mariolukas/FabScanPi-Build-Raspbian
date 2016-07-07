@@ -43,18 +43,3 @@ cat << EOF | debconf-set-selections
 locales   locales/default_environment_locale select       en_US.UTF-8
 EOF
 
-# The FabScan Server is started here for
-# the first time because by default we 
-# start with a plain FabScan HAT and the
-# firmware has to be flashed.
-
-#add fabscan server to default run scrips
-update-rc.d fabscanpi-server defaults
-
-# start the server for the first time
-FABSCAN_SERVICE=fabscanpi-server
-FABSCAN_INIT_SCRIPT=/etc/init.d/$FABSCAN_SERVICE
-
-$FABSCAN_INIT_SCRIPT start
-
-reboot
