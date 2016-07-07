@@ -43,26 +43,17 @@ cat << EOF | debconf-set-selections
 locales   locales/default_environment_locale select       en_US.UTF-8
 EOF
 
-#echo 'Reconfigured locale' >> /dev/kmsg
+# The FabScan Server is started here for
+# the first time because by default we 
+# start with a plain FabScan HAT and the
+# firmware has to be flashed.
 
-#/etc/init.d/fabscanpi-server restart
+#add fabscan server to default run scrips
+update-rc.d fabscanpi-server defaults
 
-#reboot
-# Set timezone
-#echo 'Europe/Berlin' > /etc/timezone
-#dpkg-reconfigure -f noninteractive tzdata
+# start the server for the first time
+FABSCAN_SERVICE=fabscanpi-server
+FABSCAN_INIT_SCRIPT=/etc/init.d/$FABSCAN_SERVICE
 
-#echo 'Reconfigured timezone' >> /dev/kmsg
-
-#echo 'Enabling and starting docker service' >> /dev/kmsg
-#systemctl enable docker.service
-#systemctl start docker.service
-
-#echo 'Import Docker Swarm image' >> /dev/kmsg
-#sleep 5
-#docker load < /var/hypriot/swarm.tar.gz
-#if (($? == 0)); then
-#  rm -f /var/hypriot/swarm.tar.gz
-#fi
-
+$FABSCAN_INIT_SCRIPT start
 
