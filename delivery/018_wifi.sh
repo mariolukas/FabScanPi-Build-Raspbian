@@ -3,29 +3,32 @@
 
 BannerEcho "wifi: Installing"
 
-AptInstall wpasupplicant || return 1
+AptInstall firmware-brcm80211 wpasupplicant || return 1
 
 echo "
-
 #auto wlan0
 #allow-hotplug wlan0
 #iface wlan0 inet dhcp
 #wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 #iface default inet dhcp
+#pre-up iw dev wlan0 set power_save off
+#post-down iw dev wlan0 set power_save on
 " >> /etc/network/interfaces
 
 echo "
+ctrl_interface=/var/run/wpa_supplicant
 update_config=1
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-eapol_version=1
 
+ap_scan=1
 network={
-ssid="YOUR_SSID"
-psk="YOUR_SECRET"
-proto=RSN
-key_mgmt=WPA-PSK
-pairwise=CCMP
-auth_alg=OPEN
+        ssid="YOUR SSID"
+        scan_ssid=1
+        psk="YOUR WIFI PASSWORD"
+        proto=RSN
+        key_mgmt=WPA-PSK
+        pairwise=CCMP TKIP
+        group=CCMP TKIP
+        auth_alg=OPEN
 }
 " > /etc/wpa_supplicant/wpa_supplicant.conf
 
