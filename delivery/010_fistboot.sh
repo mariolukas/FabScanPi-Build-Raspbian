@@ -27,8 +27,6 @@ if [ ! -e /root/firstboot_done ]; then
         fi
 fi
 
-/etc/init.d/fabscanpi-server start
-
 exit 0
 EOF
 
