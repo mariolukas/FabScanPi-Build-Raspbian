@@ -13,16 +13,15 @@ before_deploy:
 - touch MD5:"${MD5}"
 - touch SHA1:"${SHA1}"
 - echo "deploying $RELEASE_FILE_NAME to GitHub releases"
-before_deploy:
 - cp rpi/images/fabscanpi_basic_jessie_$TRAVIS_TAG.img .
 - zip fabscanpi_basic_jessie_$TRAVIS_TAG.zip fabscanpi_basic_jessie_$TRAVIS_TAG.img
 deploy:
   provider: releases
-  skip_cleanup: true
   api_key:
-    secure: "bA9dkNhlV726rQJieGXbCwMF/9lYt0pW+pGr/rVqWSivRB5JUrxqFEuVuXt0zcppAkLFVfSRlprBZORHf9Xomw1i4QCK449n1kBO0XeKH+Ayu4hnjmfM3hoklOraxl49e/T2WkxJMMLv+g60eyu6TtqBkVvVNK6BvVp4J5DwtpbUragjRt2gH996cibuz60ZKMMFevTFCOioTNVr3mgNF7tUj8s5qtPqC/QedvOJKfT9s7/DGayox0CRa7bjY5HwihKaPEHab4ZNvAHC+Noen/A06YN9zvs/r6mclOGG5Ak2oevjIVJLKWoJt52q/M2egWRA66hF7u2WtH1SNRsxLrMY1V6vhi/i4/CGNxQg3ByM2JzJ01mQOU1Pl0LavViz/u62SUogVc0vEe+aQa1ib0ywZv0ypQwmxkf7jBGTWiieLQouLLKuXpLRNAO7oFVD4XWbd5t9cV5qi97FnZc1TijO8wxW2zwbS+rTqZDajqg9rmWYVlgCWA4p8OPyNKW8+VcYj0H6YDdmMwMPc2gu99p7bV/UsdR8KmJLtVpDYG35lfxpfBBlq6E/yFepLsHlKT+EYHMpsFCq34T9sjXfMqqMDWH+1nvz+4ZTsEYwoGoIb5a2ZFoehF85vafn23S+fyKtEi2DPDx/y4jb1DkLBZ8c95C0sgS+7jCIT5qoA5w="
- file_glob: true
+    secure: MqnAV1F1Jo1y4+Rf5r12mk9LvInUGWqeIoiuX18B6NWYEoESxjMYt9wkk9PJQu190ruWTCItePoZWyzUeuykofgnxoEr0S7K7E0AL6Adflj/pMuYB7A0HgP0vl2Z7ycLch9uEOE9GMH3dGNfWX26OsKVjAeiD56W0AC3/Y4JZWUVVqIQJY7L7xijfMrQ3nhFJT2LCsmEm4vuFMS3bEHMptWQaiMRKOWDB7dZMzqi6LUwJaRNXPCKoUvYoKKz1oEleVR1O9k+aiQlgw3cPd/KW9EQcipHDOilQpSKEiB9rPq9dyOIBGMiyMr6s0vS6MKtZMMyaH2cDrDBx2nXVa+Hf6S2D9oS8UPSRvbD63LYonN4XApzJWPSypFe1hCySnDi701oN1BESMoTkBF6wMxXPNFCwwCbirPFZWoVmxsHWuG8vHz0kTRqJVjhZZ3/v4+FRIc8epKuTuVAjYZZCU+vyFtkuniOtxhyaoycjqx61kib/nbCsRqUc9l0P1qXsdv7J1w4JkMEMmMZ4JYEj5VeZqvBUtu5NiHBT71ZI4svlTu+g0jgysIWZedMtfqMI3Pvpcah6pcDg6eh2u+vbAHY29EEU+pGTyU1OecrJXUFDBlqumutTf84SOiXrtL/BCR8enCZ+NXJ3Rp9d2DDSjrP5G80Urbdw5T10F983Oz+420=
   file: "fabscanpi_basic_jessie_${TRAVIS_TAG}.zip"
   on:
     tags: true
     repo: mariolukas/FabScanPi-Build-Raspbian
+  file_glob: true
+  skip_cleanup: true
