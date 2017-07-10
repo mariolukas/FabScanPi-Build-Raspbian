@@ -322,7 +322,7 @@ LANG=C chroot ${rootfs} /third-stage
 echo "deb ${deb_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
-echo "deb http://archive.fabscan.org/ ${deb_release} main
+echo "deb http://archive.fabscan.org/ stable main
 " >> etc/apt/sources.list
 
 #wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
