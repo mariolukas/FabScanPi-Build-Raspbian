@@ -3,7 +3,7 @@
 
 BannerEcho "wifi: Installing"
 
-AptInstall firmware-brcm80211 wpasupplicant || return 1
+AptInstall firmware-brcm80211 wpasupplicant wireless-tools || return 1
 
 echo "
 #auto wlan0
