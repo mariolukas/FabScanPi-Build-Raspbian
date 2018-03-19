@@ -1,0 +1,9 @@
+version: '2'
+services:
+  buildserver:
+    build:
+      context: docker
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/home/dev
+
