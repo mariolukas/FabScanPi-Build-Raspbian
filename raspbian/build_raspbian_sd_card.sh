@@ -81,12 +81,12 @@ else
 fi
 
 
-if [ "${deb_local_mirror}" == "" ]; then
+#if [ "${deb_local_mirror}" == "" ]; then
   deb_local_mirror=${deb_mirror}
-fi
+#fi
 
 bootsize="64M"
-deb_release="jessie"
+deb_release="stretch"
 keyboard_layout="us"
 
 relative_path=`dirname $0`
@@ -168,7 +168,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 echo "creating an image"
 mkdir -p ${buildenv}
 image="${buildenv}/images/fabscanpi_basic_${deb_release}_${tag}.img"
-dd if=/dev/zero of=${image} bs=1MB count=1800
+dd if=/dev/zero of=${image} bs=1MB count=3800
 device=`losetup -f --show ${image}`
 loop_device=$device
 echo "image ${image} created and mounted as ${device}"
@@ -192,7 +192,7 @@ EOF
 
 if [ "${image}" != "" ]; then
   losetup -d ${device}
-  device=`kpartx -va ${image} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
+  device=`kpartx -vas ${image} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
   dmsetup mknodes || exit 1
   deviceloop="/dev/mapper/${device}"
   bootp=${deviceloop}p1
@@ -218,6 +218,19 @@ mkfs.ext4 ${rootp}
 mkdir -p ${rootfs}
 
 mount ${rootp} ${rootfs}
+cd ${rootfs}
+
+wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
+mkdir -p usr/share/keyrings
+cp /usr/share/keyrings/ubuntu-archive-keyring.gpg usr/share/keyrings/
+
+
+echo "### DeBootStraping ###"
+#debootstrap --keyring /root/.gnupg/pubring.gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}
+debootstrap --no-check-gpg --foreign --include=ca-certificates --arch=armhf ${deb_release} ${rootfs} ${deb_local_mirror}
+#debootstrap --foreign --arch=armhf --no-check-gpg --include=ca-certificates ${deb_release} ${rootfs} ${deb_local_mirror}
+cp /usr/bin/qemu-arm-static usr/bin/
+
 
 mkdir -p ${rootfs}/proc
 mkdir -p ${rootfs}/sys
@@ -225,22 +238,14 @@ mkdir -p ${rootfs}/dev
 mkdir -p ${rootfs}/dev/pts
 mkdir -p ${rootfs}/usr/src/delivery
 
-mount -t proc none ${rootfs}/proc
-mount -t sysfs none ${rootfs}/sys
 mount -o bind /dev ${rootfs}/dev
 mount -o bind /dev/pts ${rootfs}/dev/pts
+mount -t proc none ${rootfs}/proc
+mount -t sysfs none ${rootfs}/sys
 mount -o bind ${delivery_path} ${rootfs}/usr/src/delivery
 
 cd ${rootfs}
 
-wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
-
-echo "### DeBootStraping ###"
-#debootstrap --keyring /root/.gnupg/pubring.gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}
-debootstrap --no-check-gpg --foreign --arch armhf ${deb_release} ${rootfs} ${deb_local_mirror}
-cp /usr/bin/qemu-arm-static usr/bin/
-mkdir -p usr/share/keyrings
-cp /usr/share/keyrings/debian-archive-keyring.gpg usr/share/keyrings/
 echo "### DeBootStraping second stage ###"
 LANG=C chroot ${rootfs} /debootstrap/debootstrap --second-stage --no-check-gpg
 echo "### END DeBootStraping second stage ###"
@@ -252,16 +257,7 @@ echo "deb ${deb_local_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
 echo "### Configuring CMDLINE ###"
-echo "+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup-enable=memory swapaccount=1 elevator=deadline rootwait" > boot/cmdline.txt
-
-#echo "hdmi_force_hotplug=1" >> boot/config.txt
-
-# enable camera module
-#echo "start_x=1" >> boot/config.txt
-# more gpu memory
-#echo "gpu_mem=128" >> boot/config.txt
-# disable camera led
-#echo "disable_camera_led=1" >> boot/config.txt
+echo "+dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup-enable=memory swapaccount=1 elevator=deadline rootwait" > boot/cmdline.tx
 
 echo "### Configuring FSTAB ###"
 echo "proc            /proc	proc	defaults		0	0

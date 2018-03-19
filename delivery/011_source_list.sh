@@ -8,7 +8,7 @@ echo "deb-src http://archive.raspberrypi.org/debian/ jessie main ui" >> /etc/apt
 
 wget http://archive.raspberrypi.org/debian/raspberrypi.gpg.key -O - | apt-key add -
 
-echo "deb http://archive.fabscan.org/ stable main
+echo "deb http://archive.fabscan.org/ testing main
 " >> /etc/apt/sources.list
 
 # add fabscan.org archive key to apt

@@ -57,7 +57,7 @@ function AptCleanup()
 
 function AptInstall()
 {
-    apt-get install -y --force-yes $@
+    apt-get install -y $@
 }
 
 function AptInstallLater()
