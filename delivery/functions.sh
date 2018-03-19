@@ -57,7 +57,7 @@ function AptCleanup()
 
 function AptInstall()
 {
-    apt-get install -y $@
+    apt-get install -y --allow-unauthenticated $@
 }
 
 function AptInstallLater()
