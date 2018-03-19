@@ -304,6 +304,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::="--force-confnew" 
 
 # execute install script at mounted external media (delivery contents folder)
 cd /usr/src/delivery
+
 ./install.sh
 cd
 
@@ -315,13 +316,13 @@ rm -f third-stage
 chmod +x third-stage
 LANG=C chroot ${rootfs} /third-stage
 
+wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
 echo "deb ${deb_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
+wget https://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
 echo "deb http://archive.fabscan.org/ stable main
 " >> etc/apt/sources.list
-
-#wget http://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
 
 echo "#!/bin/bash
 aptitude update

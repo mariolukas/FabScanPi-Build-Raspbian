@@ -10,6 +10,11 @@ echo "Please check environment variables etc, this script can be executed ONLY w
 echo "When tasks done, type \"exit\" to return"
 echo ""
 
+locale-gen --purge en_US.UTF-8
+echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
+
+#locale-gen en_US.UTF-8
+
 #wget http://archive.fabscan.org/fabscan.public.key -O - | apt-key add -
 
 
