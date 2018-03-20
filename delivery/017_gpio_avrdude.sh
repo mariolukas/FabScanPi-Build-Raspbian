@@ -4,6 +4,9 @@ BannerEcho "Configure AVR Dude Autoreset: Installing"
 
 AptInstall avrdude python-rpi.gpio strace || return 1
 
+wget https://raw.githubusercontent.com/watterott/RPi-ShieldBridge/master/software/autoreset
+wget https://raw.githubusercontent.com/watterott/RPi-ShieldBridge/master/software/avrdude-autoreset
+
 chmod +x autoreset
 chmod +x avrdude-autoreset
 mv autoreset /usr/bin

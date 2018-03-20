@@ -281,6 +281,15 @@ snd_bcm2835
 bcm2708-rng
 " >> etc/modules
 
+locale-gen --purge en_US.UTF-8
+update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+echo "LC_CTYPE=\"en_US.UTF-8\"
+LC_ALL=\"en_US.UTF-8\"
+LANG=\"en_US.UTF-8\"
+" > /etc/default/locale
+#echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
+
+
 echo "### CONSOLE ###"
 echo "console-common	console-data/keymap/policy	select	Select keymap from full list
 console-common  console-data/keymap/full        select  us
