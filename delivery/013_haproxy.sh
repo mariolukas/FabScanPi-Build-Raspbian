@@ -30,7 +30,8 @@ frontend public
         default_backend fabscanpi
 
 backend fabscanpi
-       server fabscanpi1 127.0.0.1:8080"  > /etc/haproxy/haproxy.cfg
+       server fabscanpi1 127.0.0.1:8080
+       errorfile 503 /etc/haproxy/errors/503.http"  > /etc/haproxy/haproxy.cfg
 
 
 echo "HTTP/1.0 503 Service Unavailable^M
