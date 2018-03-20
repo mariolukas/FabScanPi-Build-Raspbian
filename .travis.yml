@@ -1,6 +1,8 @@
 dist: trusty
 group: deprecated-2017Q2
 before_install:
+- sudo echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
+- sudo apt-get install amarok/trusty-backports
 - sudo apt-get -qq update
 - sudo apt-get -y install docker.io
 - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx

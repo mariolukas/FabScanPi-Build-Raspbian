@@ -281,6 +281,10 @@ snd_bcm2835
 bcm2708-rng
 " >> etc/modules
 
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 locale-gen --purge en_US.UTF-8
 update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 echo "LC_CTYPE=\"en_US.UTF-8\"
