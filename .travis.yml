@@ -9,7 +9,7 @@ before_install:
 #- sudo dpkg -i debootstrap_1.0.93+nmu2_all.deb
 script:
 - sudo docker-compose build
-- sudo docker-compose run 
+- sudo docker-compose up 
 #- sudo ./raspbian/build_raspbian_sd_card.sh $TRAVIS_TAG
 before_deploy:
 - export RELEASE_FILE_NAME="rpi/images/fabscanpi_basic_stretch_${TRAVIS_TAG}"
