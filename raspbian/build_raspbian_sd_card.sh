@@ -281,17 +281,14 @@ snd_bcm2835
 bcm2708-rng
 " >> etc/modules
 
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 
-locale-gen --purge en_US.UTF-8
-update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-echo "LC_CTYPE=\"en_US.UTF-8\"
-LC_ALL=\"en_US.UTF-8\"
-LANG=\"en_US.UTF-8\"
-" > /etc/default/locale
-#echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
+#locale-gen --purge en_US.UTF-8
+#update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+#echo "LC_CTYPE=\"en_US.UTF-8\"
+#LC_ALL=\"en_US.UTF-8\"
+#LANG=\"en_US.UTF-8\"
+#" > /etc/default/locale
+##echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
 
 
 echo "### CONSOLE ###"
@@ -314,6 +311,9 @@ touch /boot/start.elf
 SKIP_WARNING=1 rpi-update
 
 DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::="--force-confnew" -y install locales console-common ntp openssh-server less vim
+
+sed -i '/^#.* en_US.* /s/^#//' /etc/locale.gen
+locale-gen
 
 # execute install script at mounted external media (delivery contents folder)
 cd /usr/src/delivery
