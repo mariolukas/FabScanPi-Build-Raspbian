@@ -300,6 +300,9 @@ echo "#!/bin/bash
 debconf-set-selections /debconf.set
 rm -f /debconf.set
 
+sed -i '/^#.* en_US.* /s/^#//' /etc/locale.gen
+locale-gen
+
 cd /usr/src/delivery
 apt-get -qq update
 DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::=\"--force-confnew\" -y install git-core binutils ca-certificates curl
@@ -312,8 +315,7 @@ SKIP_WARNING=1 rpi-update
 
 DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::="--force-confnew" -y install locales console-common ntp openssh-server less vim
 
-sed -i '/^#.* en_US.* /s/^#//' /etc/locale.gen
-locale-gen
+
 
 # execute install script at mounted external media (delivery contents folder)
 cd /usr/src/delivery
