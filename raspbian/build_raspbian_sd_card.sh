@@ -330,7 +330,7 @@ echo "deb ${deb_mirror} ${deb_release} main contrib non-free rpi
 " > etc/apt/sources.list
 
 wget https://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
-echo "deb http://archive.fabscan.org/ stable main
+echo "deb http://archive.fabscan.org/ testing main
 " >> etc/apt/sources.list
 
 echo "#!/bin/bash
