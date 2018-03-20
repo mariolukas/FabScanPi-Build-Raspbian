@@ -2,15 +2,15 @@ dist: trusty
 group: deprecated-2017Q2
 before_install:
 - sudo apt-get -qq update
-#- sudo apt-get -y install docker.io
-#- sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
-#  lvm2 dosfstools apt-cacher-ng parted zip wget gnupg
+- sudo apt-get -y install docker.io
+- sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
+  lvm2 dosfstools apt-cacher-ng parted zip wget gnupg
 #- wget http://archive.ubuntu.com/ubuntu/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.93+nmu2_all.deb
-#- sudo dpkg -i debootstrap_1.0.93+nmu2_all.deb
+- sudo dpkg -i debootstrap_1.0.93+nmu2_all.deb
 script:
-- sudo docker-compose build
-- sudo docker-compose up 
-#- sudo ./raspbian/build_raspbian_sd_card.sh $TRAVIS_TAG
+#- sudo docker-compose build
+#- sudo docker-compose up 
+- sudo ./raspbian/build_raspbian_sd_card.sh $TRAVIS_TAG
 before_deploy:
 - export RELEASE_FILE_NAME="rpi/images/fabscanpi_basic_stretch_${TRAVIS_TAG}"
 - export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
