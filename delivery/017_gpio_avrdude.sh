@@ -23,4 +23,4 @@ fi
 
 usermod -a -G dialout pi
 
-BannerEcho "Configure AVR Dude Autoreset: Installation Done
+BannerEcho "Configure AVR Dude Autoreset: Installation Done"
