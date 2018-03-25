@@ -2,7 +2,7 @@
 
 BannerEcho "FabScanPi Server: Installing"
 
-AptInstall fabscanpi-server || return 1
+AptInstall libharfbuzz-bin fabscanpi-server || return 1
 
 update-rc.d fabscanpi-server defaults
 

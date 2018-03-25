@@ -4,14 +4,16 @@ BannerEcho "Configure AVR Dude Autoreset: Installing"
 
 AptInstall avrdude python-rpi.gpio strace || return 1
 
-wget https://raw.githubusercontent.com/watterott/RPi-ShieldBridge/master/software/autoreset
-wget https://raw.githubusercontent.com/watterott/RPi-ShieldBridge/master/software/avrdude-autoreset
+#wget https://github.com/watterott/RPi-UNO-HAT/raw/master/software/autoreset
+#wget https://github.com/watterott/RPi-UNO-HAT/raw/master/software/avrdude-autoreset
 
-chmod +x autoreset
-chmod +x avrdude-autoreset
-mv autoreset /usr/bin
-mv avrdude-autoreset /usr/bin
+cp /usr/src/delivery/scripts/autoreset /usr/bin
+cp /usr/src/delivery/scripts/avrdude-autoreset /usr/bin
 mv /usr/bin/avrdude /usr/bin/avrdude-original
+
+chmod +x /usr/bin/autoreset
+chmod +x /usr/bin/avrdude-autoreset
+
 ln -s /usr/bin/avrdude-autoreset /usr/bin/avrdude
 
 touch /etc/udev/rules.d/80-arduinopi.rules

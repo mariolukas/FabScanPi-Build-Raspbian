@@ -1,6 +1,7 @@
 version: '2'
 services:
   buildserver:
+    privileged: true
     build:
       context: docker
       dockerfile: Dockerfile

@@ -300,8 +300,6 @@ echo "#!/bin/bash
 debconf-set-selections /debconf.set
 rm -f /debconf.set
 
-sed -i '/^#.* en_US.* /s/^#//' /etc/locale.gen
-locale-gen
 
 cd /usr/src/delivery
 apt-get -qq update
@@ -309,13 +307,14 @@ DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::=\"--force-confnew\
 wget --continue https://raw.github.com/Hexxeh/rpi-update/master/rpi-update -O /usr/bin/rpi-update
 #wget --no-check-certificate --continue https://github.fr.world.socgen/raw/GTSMKTSSB/rpi-update/master/rpi-update -O /usr/bin/rpi-update
 chmod +x /usr/bin/rpi-update
-mkdir -p /lib/modules/3.1.9+
+mkdir -p /lib/modules
 touch /boot/start.elf
 SKIP_WARNING=1 rpi-update
 
 DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::="--force-confnew" -y install locales console-common ntp openssh-server less vim
 
-
+sed -i '/^#.* en_US.* /s/^#//' /etc/locale.gen
+locale-gen
 
 # execute install script at mounted external media (delivery contents folder)
 cd /usr/src/delivery

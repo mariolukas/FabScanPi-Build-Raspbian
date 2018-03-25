@@ -76,7 +76,7 @@ rlimit-fsize=0
 rlimit-nofile=768
 rlimit-stack=4194304
 rlimit-nproc=3
-"" > /etc/avahi/avahi-daemon.conf
+" > /etc/avahi/avahi-daemon.conf
 
 
 BannerEcho "avahi-daemon: Done"
