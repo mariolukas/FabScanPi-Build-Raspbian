@@ -168,7 +168,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 echo "creating an image"
 mkdir -p ${buildenv}
 image="${buildenv}/images/fabscanpi_basic_${deb_release}_${tag}.img"
-dd if=/dev/zero of=${image} bs=1MB count=3800
+dd if=/dev/zero of=${image} bs=1MB count=1500
 device=`losetup -f --show ${image}`
 loop_device=$device
 echo "image ${image} created and mounted as ${device}"
