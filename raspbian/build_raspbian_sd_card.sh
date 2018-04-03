@@ -57,8 +57,8 @@
 # you need at least
 # apt-get install binfmt-support qemu qemu-user-static debootstrap kpartx lvm2 dosfstools
 
-deb_mirror="http://archive.raspbian.org/raspbian/"
-deb_local_mirror="http://127.0.0.1:3142/archive.raspbian.org/raspbian/"
+source ./raspbian/set_vars.sh
+cp raspbian/set_vars.sh delivery/set_vars.sh
 
 if [ ${EUID} -ne 0 ]; then
   echo "this tool must be run as root"
@@ -85,9 +85,6 @@ fi
   deb_local_mirror=${deb_mirror}
 #fi
 
-bootsize="64M"
-deb_release="stretch"
-keyboard_layout="us"
 
 relative_path=`dirname $0`
 
@@ -168,7 +165,7 @@ trap on_cancel SIGHUP SIGINT SIGTERM
 echo "creating an image"
 mkdir -p ${buildenv}
 image="${buildenv}/images/fabscanpi_basic_${deb_release}_${tag}.img"
-dd if=/dev/zero of=${image} bs=1MB count=1500
+dd if=/dev/zero of=${image} bs=1MB count=2500
 device=`losetup -f --show ${image}`
 loop_device=$device
 echo "image ${image} created and mounted as ${device}"
@@ -300,7 +297,6 @@ echo "#!/bin/bash
 debconf-set-selections /debconf.set
 rm -f /debconf.set
 
-
 cd /usr/src/delivery
 apt-get -qq update
 DEBIAN_FRONTEND=noninteractive apt-get -qq -o Dpkg::Options::=\"--force-confnew\" -y install git-core binutils ca-certificates curl
@@ -319,6 +315,7 @@ locale-gen
 # execute install script at mounted external media (delivery contents folder)
 cd /usr/src/delivery
 
+./set_vars.sh
 ./install.sh
 cd
 
@@ -330,13 +327,13 @@ rm -f third-stage
 chmod +x third-stage
 LANG=C chroot ${rootfs} /third-stage
 
-wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
-echo "deb ${deb_mirror} ${deb_release} main contrib non-free rpi
-" > etc/apt/sources.list
+#wget https://archive.raspbian.org/raspbian.public.key -O - | gpg --import -
+#echo "deb ${deb_mirror} ${deb_release} main contrib non-free rpi
+#" > etc/apt/sources.list
 
-wget https://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
-echo "deb http://archive.fabscan.org/ testing main
-" >> etc/apt/sources.list
+#wget https://archive.fabscan.org/fabscan.public.key -O - | gpg --import -
+#echo "deb http://archive.fabscan.org/ testing main
+#" >> etc/apt/sources.list
 
 echo "#!/bin/bash
 aptitude update
@@ -354,6 +351,7 @@ sleep 15
 
 # Make sure we're out of the root fs. We won't be able to unmount otherwise, and umount -l will fail silently.
 #cd
+rm delivery/set_vars.sh
 
 umount -l ${bootp}
 umount -l ${rootfs}/usr/src/delivery

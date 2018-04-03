@@ -21,8 +21,8 @@ before_deploy:
 - touch MD5:"${MD5}"
 - touch SHA1:"${SHA1}"
 - echo "deploying $RELEASE_FILE_NAME to GitHub releases"
-- cp rpi/images/fabscanpi_basic_stretch_$TRAVIS_TAG.img .
-- zip fabscanpi_basic_stretch_$TRAVIS_TAG.zip fabscanpi_basic_stretch_$TRAVIS_TAG.img
+- travis_wait cp rpi/images/fabscanpi_basic_stretch_$TRAVIS_TAG.img .
+- travis_wait zip fabscanpi_basic_stretch_$TRAVIS_TAG.zip fabscanpi_basic_stretch_$TRAVIS_TAG.img
 deploy:
   provider: releases
   api_key:

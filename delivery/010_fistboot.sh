@@ -6,8 +6,6 @@ cp /usr/src/delivery/firstboot.sh /root/firstboot.sh
 cp /usr/src/delivery/resize_root_partition /usr/sbin/resize_root_partition
 
 
-systemctl enable rc-local
-
 cat << EOF > /etc/systemd/system/rc-local.service
 [Unit]
 Description=/etc/rc.local
@@ -23,7 +21,6 @@ SysVStartPriority=99
 
 [Install]
 WantedBy=multi-user.target
-
 EOF
 
 cat << EOF > /etc/rc.local
@@ -52,4 +49,6 @@ exit 0
 EOF
 
 chmod +x /etc/rc.local
+
+systemctl enable rc-local
 
