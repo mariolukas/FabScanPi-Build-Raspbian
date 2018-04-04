@@ -8,8 +8,8 @@ before_install:
 #- sudo apt-get -y install docker.io
 - sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
   lvm2 dosfstools apt-cacher-ng parted zip wget gnupg
-- wget http://archive.ubuntu.com/ubuntu/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.93+nmu2_all.deb
-- sudo dpkg -i debootstrap_1.0.93+nmu2_all.deb
+- wget http://archive.ubuntu.com/ubuntu/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.95_all.deb
+- sudo dpkg -i debootstrap_1.0.95_all.deb
 script:
 #- sudo docker-compose build
 #- sudo docker-compose up 
