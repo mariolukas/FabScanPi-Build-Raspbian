@@ -9,12 +9,9 @@ AptInstall avrdude python-rpi.gpio strace || return 1
 
 cp /usr/src/delivery/scripts/autoreset /usr/bin
 cp /usr/src/delivery/scripts/avrdude-autoreset /usr/bin
-mv /usr/bin/avrdude /usr/bin/avrdude-original
 
 chmod +x /usr/bin/autoreset
 chmod +x /usr/bin/avrdude-autoreset
-
-ln -s /usr/bin/avrdude-autoreset /usr/bin/avrdude
 
 touch /etc/udev/rules.d/80-arduinopi.rules
 echo "KERNEL=="ttyAMA0", SYMLINK+="ttyS0",GROUP="dialout",MODE:=0666" > /etc/udev/rules.d/80-arduinopi.rules
