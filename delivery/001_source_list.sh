@@ -15,5 +15,9 @@ echo "deb http://archive.fabscan.org/ $fabscan_release main
 wget http://archive.fabscan.org/fabscan.public.key -O - | apt-key add -
 apt-get update
 
+AptInstall apt-transport-https || return 1
+
+apt-get update
+
 BannerEcho "APT: Configure Done"
 
