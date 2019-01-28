@@ -1,5 +1,5 @@
 
-:warning: This build script is **DEPRECATED**. We recommend to use the [new one], based on offical Raspbian build scripts.(https://github.com/mariolukas/FabScanPi-gen). :warning:
+:warning: This build script is **DEPRECATED**. We recommend to use the [new one](https://github.com/mariolukas/FabScanPi-gen), based on offical Raspbian build scripts.. :warning:
 
 [![Build Status](https://travis-ci.org/mariolukas/FabScanPi-Build-Raspbian.svg?branch=master)](https://travis-ci.org/mariolukas/FabScanPi-Build-Raspbian)
 Build Raspbian Image
