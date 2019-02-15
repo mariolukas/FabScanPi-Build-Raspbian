@@ -46,7 +46,7 @@ unmount(){
 		local LOCS
 		LOCS=$(mount | grep "$DIR" | cut -f 3 -d ' ' | sort -r)
 		for loc in $LOCS; do
-			umount "$loc"
+			umount -R "$loc"
 		done
 	done
 }
