@@ -1,5 +1,4 @@
 # FabScanPi-gen
-
 _Tool used to create the fabscan.org Raspbian images. Based on raspberrypi.org Raspbian images_
 This repository is a "fork" of the official Raspbian build script  (https://github.com/RPi-Distro/pi-gen). 
 The fork was copied to this repository for keeping old FabScanPi-Image releases in 
