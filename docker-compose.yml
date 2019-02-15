@@ -1,10 +1,10 @@
 version: '2'
-services:
-  buildserver:
-    privileged: true
-    build:
-      context: docker
-      dockerfile: Dockerfile
-    volumes:
-      - ./:/home/dev
 
+services:
+  apt-cacher-ng:
+    restart: unless-stopped
+    image: sameersbn/apt-cacher-ng:latest
+    ports:
+    - "3142:3142"
+    volumes:
+    - ./apt-cacher-ng:/var/cache/apt-cacher-ng
