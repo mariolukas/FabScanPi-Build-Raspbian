@@ -15,6 +15,7 @@ script:
 #- sudo docker-compose up 
 #- sudo ./raspbian/build_raspbian_sd_card.sh $TRAVIS_TAG
 - sudo ./build-docker.sh
+- sduo CONTINUE=1 ./build-docker.sh
 before_deploy:
 - export RELEASE_FILE_NAME="deploy/image_"$(date +%Y-%m-%d)"}"-FabScanPi-lite.zip"
 - export MD5=$(md5sum ${RELEASE_FILE_NAME} | cut -d ' ' -f 1)
