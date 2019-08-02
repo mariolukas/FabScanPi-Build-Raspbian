@@ -8,7 +8,7 @@ It adds a fabscan stage to the default Raspbian image build.
 Be sure that you have installed Docker on yout System. You will also need a git client installed.
 Just start the script by calling: 
 
-  ./build-fabscan.sh
+  sudo ./build-fabscan.sh
 
 ## Clean up
 For cleaning up the workspace just call 
