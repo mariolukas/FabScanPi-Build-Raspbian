@@ -2,6 +2,10 @@
 
 # get pi-gen sources
 git clone https://github.com/RPi-Distro/pi-gen
+cd pi-gen
+git fetch && git fetch --tags
+git checkout 2019-06-20-raspbian-buster
+cd ..
 
 touch pi-gen/stage5/SKIP_IMAGES
 touch pi-gen/stage5/SKIP
@@ -29,4 +33,5 @@ case "$OSTYPE" in
 esac
 
 echo "Running build...."
-./pi-gen/build-docker.sh
+cd pi-gen
+./build-docker.sh
