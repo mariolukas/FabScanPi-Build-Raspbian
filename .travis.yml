@@ -6,8 +6,8 @@ before_install:
 - sudo apt-get install coreutils quilt parted qemu-user-static debootstrap zerofree zip dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
 #- sudo echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
 - sudo add-apt-repository ppa:gns3/qemu -y
-- wget -q -O - https://dl.google.com/linux/
-- sudo linux_signing_key.pub | sudo apt-key add -
+#- wget -q -O - https://dl.google.com/linux/
+#- sudo linux_signing_key.pub | sudo apt-key add -
 - sudo apt-get -qq update
 script:
 - sudo ./build-docker.sh
