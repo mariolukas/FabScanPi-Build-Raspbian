@@ -1,19 +1,11 @@
 dist: trusty
 group: deprecated-2017Q2
 before_install:
+- sudo apt-get install coreutils quilt parted qemu-user-static debootstrap zerofree zip dosfstools bsdtar libcap2-bin grep rsync xz-utils file git curl
 #- sudo echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
-#- sudo apt-get install amarok/trusty-backports
 - sudo add-apt-repository ppa:gns3/qemu -y
 - sudo apt-get -qq update
-#- sudo apt-get -y install docker.io
-#- sudo apt-get -qq -y install binfmt-support qemu qemu-user-static debootstrap kpartx
-#  lvm2 dosfstools apt-cacher-ng parted zip wget gnupg
-#- wget http://archive.ubuntu.com/ubuntu/ubuntu/pool/main/d/debootstrap/debootstrap_1.0.95_all.deb
-#- sudo dpkg -i debootstrap_1.0.95_all.deb
 script:
-#- sudo docker-compose build
-#- sudo docker-compose up 
-#- sudo ./raspbian/build_raspbian_sd_card.sh $TRAVIS_TAG
 - sudo ./build-docker.sh
 - sudo CONTINUE=1 ./build-docker.sh
 before_deploy:
@@ -23,8 +15,6 @@ before_deploy:
 - touch MD5:"${MD5}"
 - touch SHA1:"${SHA1}"
 - echo "deploying $RELEASE_FILE_NAME to GitHub releases"
-#- travis_wait cp rpi/images/fabscanpi_basic_stretch_$TRAVIS_TAG.img .
-#- travis_wait zip fabscanpi_basic_stretch_$TRAVIS_TAG.zip fabscanpi_basic_stretch_$TRAVIS_TAG.img
 deploy:
   provider: releases
   api_key:

@@ -34,4 +34,5 @@ esac
 
 echo "Running build...."
 cd pi-gen
-./build-docker.sh
+#./build-docker.sh
+./build.sh

@@ -1,4 +1,4 @@
 IMG_NAME='FabScanPi'
-FABSCANPI_STAGE=testing
+FABSCANPI_STAGE=stable
 STAGE_LIST="stage0 stage1 stage2 stage-fabscan"
 ENABLE_SSH=1
