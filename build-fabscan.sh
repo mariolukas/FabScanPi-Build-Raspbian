@@ -4,7 +4,7 @@
 git clone https://github.com/RPi-Distro/pi-gen
 cd pi-gen
 git fetch && git fetch --tags
-git checkout 2019-06-20-raspbian-buster
+git checkout 2019-07-10-raspbian-buster
 cd ..
 
 touch pi-gen/stage5/SKIP_IMAGES
