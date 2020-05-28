@@ -23,18 +23,15 @@ on_chroot << EOF
 	systemctl enable rc-local
 EOF
 
-
 # configure boot.txt for fabscanpi
-echo " " >> ${ROOTFS_DIR}/boot/config.txt
-echo "#fabscan related" >> ${ROOTFS_DIR}/boot/config.txt
-echo "hdmi_force_hotplug=1" >> ${ROOTFS_DIR}/boot/config.txt
-# enable camera module
+
+#echo "hdmi_force_hotplug=1" >> ${ROOTFS_DIR}/boot/config.txt
+#enable camera module
 echo "start_x=1" >> ${ROOTFS_DIR}/boot/config.txt
 # more gpu memory
-echo "gpu_mem=128" >> ${ROOTFS_DIR}/boot/config.txt
-# disable camera led
+echo "gpu_mem=192" >> ${ROOTFS_DIR}/boot/config.txt
+#disable camera led
 echo "disable_camera_led=1" >> ${ROOTFS_DIR}/boot/config.txt
-
 
 # max usb power
 #echo "max_usb_current=1" >> /boot/config.txt
