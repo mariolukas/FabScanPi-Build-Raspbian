@@ -52,11 +52,97 @@ Content-Type: text/html
             h1 {
                 line-height: 1.3;
             }
+
+.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
         </style>
+
+<script>
+
+var timeoutCounter = 0;
+
+var interval = setInterval(function() {
+    ping(20)
+}, 5000);
+
+function ping(maxTimeouts){
+    
+    var req = new XMLHttpRequest();
+
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.href = window.location.href
+            clearInterval(interval);
+        } else {
+            timeoutCounter++;
+
+            if (timeoutCounter >= maxTimeouts) {
+                    document.getElementById("booting").style.display = "none";
+                    document.getElementById("error").style.display = "block";
+                  //  alert("Max Timeouts ("+ maxTimeouts + ") exceeded!");
+                    clearInterval(interval);
+            }
+        }
+    };
+    req.open("GET", window.location.href, true);
+    req.send();
+}
+
+</script>
     </head>
     <body>
-        <div class=\"wrapper\">
-            <h1>The FabScanPi server is currently not running</h1>
+    <div id="booting" class="wrapper">
+        <h1 style="text-align:center">Waiting for FabScanPi Server ...</h1>
+
+<div class="spinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+
+    </div>
+        <div id="error" class=\"wrapper\" style="display:none;">
+            <center><h1>The FabScanPi server is currently not running</h1></center>
             <p>
                 If you just started up your Raspberry Pi, please wait a couple of seconds, then
                 try to refresh this page.

@@ -8,7 +8,7 @@
 #CONF_SWAPFILE=/var/swap
 # set size to absolute value, leaving empty (default) then uses computed value
 #   you most likely don't want this, unless you have an special disk situation
-CONF_SWAPSIZE=500
+CONF_SWAPSIZE=2048
 # set size to computed value, this times RAM size, dynamically adapts,
 #   guarantees that there is enough swap without wasting disk space on excess
 #CONF_SWAPFACTOR=2
