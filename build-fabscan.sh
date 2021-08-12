@@ -1,10 +1,10 @@
 #!/bin/bash
-
+USE_DOCKER=$1
 # get pi-gen sources
 git clone https://github.com/RPi-Distro/pi-gen
 cd pi-gen
 git fetch && git fetch --tags
-git checkout 2019-07-10-raspbian-buster
+git checkout 2021-05-07-raspbian-buster
 cd ..
 
 touch pi-gen/stage5/SKIP_IMAGES
@@ -24,6 +24,7 @@ cp config pi-gen/config
 # copy fabscan stage
 cp -R stage-fabscan pi-gen/stage-fabscan
 
+echo $OSTYPE
 
 case "$OSTYPE" in
   darwin*)  
@@ -34,5 +35,12 @@ esac
 
 echo "Running build...."
 cd pi-gen
-./build-docker.sh
+if [[ $USE_DOCKER == "docker" ]]
+then
+  ./build-docker.sh
+else
+  ./build.sh
+fi
+
+
 #./build.sh

@@ -1,0 +1,18 @@
+name: build debian package
+on: [push]
+jobs:
+  build-debian-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  🏗 install build dependencies
+        run: |
+          sudo add-apt-repository ppa:gns3/qemu -y && \
+          apt -qq update && apt-get install -y coreutils quilt parted qemu-user-static debootstrap zerofree zip \
+          dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc xxd \
+          qemu-utils kpartx kmod
+      - name: ⬇ Checkout code
+        uses: actions/checkout@v2
+        with:
+         fetch-depth: 0
+      - name: run build
+        run: ./build-fabscan.sh docker
