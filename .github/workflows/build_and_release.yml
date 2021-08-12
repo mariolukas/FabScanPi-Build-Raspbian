@@ -7,7 +7,8 @@ jobs:
       - name:  🏗 install build dependencies
         run: |
           sudo add-apt-repository ppa:gns3/qemu -y && \
-          apt -qq update && apt-get install -y coreutils quilt parted qemu-user-static debootstrap zerofree zip \
+          sudo apt -qq update && \
+          sudo apt-get install -y coreutils quilt parted qemu-user-static debootstrap zerofree zip \
           dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc xxd \
           qemu-utils kpartx kmod
       - name: ⬇ Checkout code
