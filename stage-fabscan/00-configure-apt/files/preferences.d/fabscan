@@ -1,3 +1,0 @@
-Package: *opencv*
-Pin: release o=archive.fabscan.org
-Pin-Priority: 1000
