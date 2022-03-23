@@ -1,5 +1,8 @@
 name: build debian package
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 jobs:
   build-debian-package:
     runs-on: ubuntu-latest
@@ -16,4 +19,27 @@ jobs:
         with:
          fetch-depth: 0
       - name: run build
-        run: ./build-fabscan.sh docker
+        run: ./build-fabscan.sh
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create new FabScanPi Image Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.vars.outputs.tag }}
+          release_name: Release ${{ steps.vars.outputs.tag }}
+          draft: false
+          prerelease: false
+      - name: Upload Image as Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pi-gen/deploy/image_${{ steps.date.outputs.date }}-FabScanPi-lite.zip
+          asset_name: image_${{ steps.date.outputs.date }}-FabScanPi-lite.zip
+          asset_content_type: application/zip

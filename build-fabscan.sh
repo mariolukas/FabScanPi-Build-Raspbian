@@ -4,7 +4,7 @@ git clone https://github.com/RPi-Distro/pi-gen
 cd pi-gen
 git fetch && git fetch --tags
 #git checkout 2022-01-28-raspios-bullseye
-git checkout master
+git checkout 5d044ba71b7eba33860fdbf222a9a29ae42691e9
 
 cd ..
 
