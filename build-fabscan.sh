@@ -1,10 +1,10 @@
 #!/bin/bash
 # get pi-gen sources
 git clone https://github.com/RPi-Distro/pi-gen
+
 cd pi-gen
 git fetch && git fetch --tags
-#git checkout 2022-01-28-raspios-bullseye
-git checkout 5d044ba71b7eba33860fdbf222a9a29ae42691e9
+git checkout 2024-03-15-raspios-bookworm
 
 cd ..
 
@@ -54,4 +54,5 @@ esac
 
 echo "Running build...."
 cd pi-gen
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 ./build-docker.sh

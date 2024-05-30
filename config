@@ -1,5 +1,7 @@
-RELEASE=bullseye
+RELEASE=bookworm
 IMG_NAME='FabScanPi'
-FABSCANPI_STAGE=stable
+FABSCANPI_STAGE=testing
 STAGE_LIST="stage0 stage1 stage2 stage-fabscan"
 ENABLE_SSH=1
+#APT_PROXY=http://172.17.0.1:3142
+PIGEN_DOCKER_OPTS=--platform=linux/amd64

@@ -4,11 +4,6 @@
 
 echo 'Starting firstboot.sh' >> /dev/kmsg
 
-# resize root partion to possible maximum
-echo 'Resizing root partition' >> /dev/kmsg
-
-raspi-config nonint do_expand_rootfs
-
 # Get current date from debian time server
 ntpdate 0.debian.pool.ntp.org
 
@@ -27,4 +22,10 @@ echo '  Generating new SSH host keys ...' >> /dev/kmsg
 dpkg-reconfigure openssh-server
 echo '  Reconfigured openssh-server' >> /dev/kmsg
 
-reboot
+echo 'Deactivate Serial Console' >> /dev/kmsg
+# disable serial console
+raspi-config nonint do_serial_cons 1
+
+echo 'Resizing root partition' >> /dev/kmsg
+raspi-config nonint do_expand_rootfs
+

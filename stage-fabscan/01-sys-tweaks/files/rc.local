@@ -14,14 +14,14 @@
 # Print the IP address
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
-  printf "My IP address is %s\n" "$_IP"
+    printf "My IP address is %s\n" "$_IP"
 fi
 
 if [ ! -e /root/firstboot_done ]; then
+    if [ -e /root/firstboot.sh ]; then
         touch /root/firstboot_done
-        if [ -e /root/firstboot.sh ]; then
-                /root/firstboot.sh
-        fi
+        /root/firstboot.sh
+    fi
 fi
 
 exit 0
