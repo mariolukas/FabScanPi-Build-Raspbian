@@ -14,11 +14,6 @@ touch pi-gen/stage5/SKIP
 touch pi-gen/stage4/SKIP_IMAGES
 touch pi-gen/stage4/SKIP
 
-# modifiy orignal build script
-#${ echo -n 'export FABSCANPI_STAGE="\$\{FABSCANPI_STAGE:-testing\}"\n export ENABLE_SWAPPING="\$\{ENABLE_SWAPPING:-1\}"\n'; cat build.sh; } > pi-gen/build.sh
-
-
-
 #copy config
 cp config pi-gen/config
 
