@@ -21,10 +21,15 @@ on_chroot << EOF
 		systemctl enable dphys-swapfile
 	fi
 
+  # disabale bluetooth
+  systemctl disable hciuart.service
+  systemctl disable bluealsa.service
+  systemctl disable bluetooth.service
+
 	systemctl enable rc-local
 EOF
 
-# disabale bt  to prevent serial port problems..
+# disabale bt and configure serial port  to prevent serial port problems..
 cat <<EOL >> $CONFIG
 [pi3]
 dtoverlay=pi3-disable-bt
@@ -33,7 +38,8 @@ dtoverlay=pi3-disable-bt
 [pi4]
 dtoverlay=disable-bt
 [pi5]
-dtoverlay=disable-bt-pi5
+dtoverlay=disable-bt
+dtparam=uart0_console=on
 EOL
 
 # override cmdline.txt with fabscanpi one ( serial console disabled )
